@@ -1,153 +1,137 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>{{ $heading ?? 'Kinantara' }}</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    .active-nav {
-      border-bottom: 2px solid #FFB627;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+<body>
+    <!-- <nav>
+        <a href="/">Home</a>
+        <a href="/about">About</a>
+        <a href="/contact">Contact</a>
+    </nav>
 
-{{-- Cek apakah ini beranda --}}
-@php $isHome = request()->is('/'); @endphp
+    {{ $slot }} -->
+     <!--
+  This example requires updating your template:
 
-<body
-  @if($isHome)
-    class="relative bg-cover bg-center min-h-screen"
-    style="background-image: url('/assets/img/bg-kintara.png');"
-  @else
-    class="bg-[#FAF9F6] min-h-screen"
-  @endif
->
-  {{-- Jika beranda: overlay gelap --}}
-  @if($isHome)
-    <div class="absolute inset-0 bg-black bg-opacity-50 z-0"></div>
-  @endif
+  ```
+  <html class="h-full bg-gray-100">
+  <body class="h-full">
+  ```
+-->
+    <div class="min-h-full">
+    <nav class="bg-gray-800">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="flex h-16 items-center justify-between">
+            <div class="flex items-center">
+            <div class="shrink-0">
+                <img src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=500" alt="Your Company" class="size-8" />
+            </div>
+            <div class="hidden md:block">
+                <div class="ml-10 flex items-baseline space-x-4">
+                <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
+                <a href="/" aria-current="page" class="rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white">Dashboard</a>
+                <a href="/" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Home</a>
+                <a href="/about" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">About</a>
+                <a href="/contact" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Contact</a>
+                </div>
+            </div>
+            </div>
+            <div class="hidden md:block">
+            <!-- <div class="ml-4 flex items-center md:ml-6">
+                <button type="button" class="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-hidden">
+                <span class="absolute -inset-1.5"></span>
+                <span class="sr-only">View notifications</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" data-slot="icon" aria-hidden="true" class="size-6">
+                    <path d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+                </button> -->
 
-  {{-- Navbar selalu --}}
-  <nav class="relative z-10 flex justify-between items-center px-8 py-4 bg-white/80 backdrop-blur-md">
-    <div class="flex items-center gap-2">
-      <img src="/assets/img/logo.png" class="w-15 h-10" alt="Logo">
-      <!-- <span class="font-semibold text-lg text-emerald-800">
-        Kinantara <span class="text-[#FFB627]">(Kisah Nusantara)</span>
-      </span> -->
-    </div>
-    <div class="flex gap-8 text-sm font-medium">
-      <a href="/"
-         class="{{ request()->is('/') ? 'active-nav text-[#FFB627]' : 'text-gray-700 hover:text-[#FFB627]' }}">
-        Beranda
-      </a>
-      <a href="/about"
-         class="{{ request()->is('about') ? 'active-nav text-[#FFB627]' : 'text-gray-700 hover:text-[#FFB627]' }}">
-        Jelajah Pulau
-      </a>
-      <a href="/contact"
-         class="{{ request()->is('contact') ? 'active-nav text-[#FFB627]' : 'text-gray-700 hover:text-[#FFB627]' }}">
-        E-Book
-      </a>
-      <a href="#"
-         class="text-gray-700 hover:text-[#FFB627]">
-        Video
-      </a>
-    </div>
-  </nav>
+                <!-- Profile dropdown -->
+                <!-- <div class="relative ml-3">
+                <button id="user-menu-button" type="button" aria-expanded="false" aria-haspopup="true" class="relative flex max-w-xs items-center rounded-full bg-gray-800 text-sm focus:outline-hidden focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-gray-800">
+                    <span class="absolute -inset-1.5"></span>
+                    <span class="sr-only">Open user menu</span>
+                    <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" class="size-8 rounded-full" />
+                </button> -->
 
-  {{-- Hero cuma di beranda --}}
-  @if($isHome)
-    <section class="relative z-10 text-white px-8 mt-20">
-      <div class="max-w-3xl">
-        <h1 class="text-5xl font-semibold drop-shadow-md mb-6">
-          Kisah Nusantara
-        </h1>
-        <p class="text-lg text-white/90 mb-8 leading-relaxed drop-shadow-sm">
-          Jelajahi kekayaan budaya Indonesia melalui cerita-cerita indah dari setiap pulau di Nusantara
-        </p>
-        <div class="flex gap-4">
-          <a href="#"
-             class="px-6 py-3 rounded-md bg-[#1B998B] text-white hover:bg-[#157f73] transition">
-            Mulai Menjelajah
-          </a>
-          <a href="#"
-             class="px-6 py-3 rounded-md bg-[#3D2C29] text-white hover:bg-[#2e1f1c] transition">
-            Baca Cerita
-          </a>
+                <!--
+                    Dropdown menu, show/hide based on menu state.
+
+                    Entering: "transition ease-out duration-100"
+                    From: "transform opacity-0 scale-95"
+                    To: "transform opacity-100 scale-100"
+                    Leaving: "transition ease-in duration-75"
+                    From: "transform opacity-100 scale-100"
+                    To: "transform opacity-0 scale-95"
+                -->
+                
+                </div>
+            </div>
+            </div>
+            <div class="-mr-2 flex md:hidden">
+            <!-- Mobile menu button -->
+            <button type="button" aria-controls="mobile-menu" aria-expanded="false" class="relative inline-flex items-center justify-center rounded-md bg-gray-800 p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-hidden">
+                <span class="absolute -inset-0.5"></span>
+                <span class="sr-only">Open main menu</span>
+                <!-- Menu open: "hidden", Menu closed: "block" -->
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" data-slot="icon" aria-hidden="true" class="block size-6">
+                <path d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+                <!-- Menu open: "block", Menu closed: "hidden" -->
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" data-slot="icon" aria-hidden="true" class="hidden size-6">
+                <path d="M6 18 18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+            </button>
+            </div>
         </div>
-      </div>
-    </section>
-  @endif
+        </div>
 
-  {{-- Konten halaman (slot) --}}
-  <main class="relative z-10 mt-{{ $isHome ? '20' : '0' }}">
-    <div class="px-8 py-4">
-      @if(!$isHome && isset($heading))
-        <h1 class="text-3xl font-bold text-[#3D2C29] mb-6">{{ $heading }}</h1>
-      @endif
-      {{ $slot }}
+        <!-- Mobile menu, show/hide based on menu state. -->
+        <div id="mobile-menu" class="md:hidden">
+        <div class="space-y-1 px-2 pt-2 pb-3 sm:px-3">
+            <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
+            <a href="/" aria-current="page" class="block rounded-md bg-gray-900 px-3 py-2 text-base font-medium text-white">Dashboard</a>
+            <a href="/" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Home</a>
+            <a href="/about" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">About</a>
+            <a href="/contact" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Contact</a>
+        </div>
+        <!-- <div class="border-t border-gray-700 pt-4 pb-3">
+            <div class="flex items-center px-5">
+            <div class="shrink-0">
+                <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" class="size-10 rounded-full" />
+            </div>
+            <div class="ml-3">
+                <div class="text-base/5 font-medium text-white">Tom Cook</div>
+                <div class="text-sm font-medium text-gray-400">tom@example.com</div>
+            </div>
+            <button type="button" class="relative ml-auto shrink-0 rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-hidden">
+                <span class="absolute -inset-1.5"></span>
+                <span class="sr-only">View notifications</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" data-slot="icon" aria-hidden="true" class="size-6">
+                <path d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+            </button>
+            </div> -->
+            
+        </div>
+        </div>
+    </nav>
+
+    <header class="bg-white shadow-sm">
+        <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+        <h1 class="text-3xl font-bold tracking-tight text-gray-900">{{ $heading }}</h1>
+        </div>
+    </header>
+    <main>
+        <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+        {{ $slot }}
+        </div>
+    </main>
     </div>
-  </main>
+
 </body>
-<footer class="bg-gradient-to-r from-green-900 via-teal-700 to-blue-600 text-white pt-16 pb-8">
-  <div class="text-center max-w-2xl mx-auto px-4 mb-12">
-    <h2 class="text-2xl font-bold mb-2">Mulai Petualangan Budaya Anda</h2>
-    <p class="text-sm mb-6">
-      Jangan biarkan kekayaan budaya Indonesia hilang begitu saja. Mari lestarikan dan bagikan cerita-cerita indah ini untuk generasi mendatang.
-    </p>
-    <div class="flex justify-center gap-4 flex-wrap">
-      <a href="#" class="bg-white text-gray-800 font-medium px-4 py-2 rounded shadow hover:bg-gray-200">
-        Jelajahi Cerita
-      </a>
-      <button disabled class="bg-white/30 text-white px-4 py-2 rounded cursor-not-allowed">
-        Cari Berdasarkan Daerah
-      </button>
-    </div>
-  </div>
-
-  <div class="border-t border-white/20 pt-10">
-    <div class="max-w-6xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8 text-sm">
-      <!-- Kolom 1 -->
-      <div>
-        <h3 class="font-semibold text-lg mb-2 flex items-center gap-2">
-          <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 12.414a4 4 0 00-5.657 5.657l4.243 4.243a4 4 0 005.657-5.657z" />
-            <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-          </svg>
-          Nusantara
-        </h3>
-        <p>Menjelajahi kekayaan budaya Indonesia melalui cerita dan tradisi yang tersebar di seluruh Nusantara.</p>
-      </div>
-
-      <!-- Kolom 2 -->
-      <div>
-        <h3 class="font-semibold text-lg mb-2">Kontak Kami</h3>
-        <ul>
-          <li>📧 info@nusantara.id</li>
-          <li>📞 +62 21 1234 5678</li>
-          <li>📍 Jakarta, Indonesia</li>
-        </ul>
-      </div>
-
-      <!-- Kolom 3 -->
-      <div>
-        <h3 class="font-semibold text-lg mb-2">Jelajahi</h3>
-        <div class="grid grid-cols-2 gap-x-4">
-          <ul class="space-y-1">
-            <li><a href="#" class="hover:underline">Pulau Jawa</a></li>
-            <li><a href="#" class="hover:underline">Kalimantan</a></li>
-            <li><a href="#" class="hover:underline">Papua</a></li>
-          </ul>
-          <ul class="space-y-1">
-            <li><a href="#" class="hover:underline">Pulau Sumatra</a></li>
-            <li><a href="#" class="hover:underline">Sulawesi</a></li>
-            <li><a href="#" class="hover:underline">Semua Cerita</a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
-</footer>
 </html>

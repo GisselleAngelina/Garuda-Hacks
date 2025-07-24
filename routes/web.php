@@ -10,6 +10,7 @@ Route::get('/about', function () {
 });
 Route::get('/contact', function () {
     return view('pages.contact');
+
 });
 
 // halaman pulau
