@@ -5,9 +5,12 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('home');
 });
-Route::get('/about', function () {
-    return view('pages.about');
+Route::get('/jelajahpulau', function () {
+    return view('pages.jelajahpulau');
 });
-Route::get('/contact', function () {
-    return view('pages.contact');
+Route::get('/ebook', function () {
+    return view('pages.ebook');
+});
+Route::get('/video', function () {
+    return view('pages.video');
 });
