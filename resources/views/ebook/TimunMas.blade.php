@@ -1,3 +1,4 @@
+<x-layout :heading="''">
 <html lang="en">
 <head>
   <meta charset="utf-8" />
@@ -39,11 +40,12 @@
     }
   </style>
 </head>
-<body class="bg-gradient-to-tr from-yellow-100 via-yellow-50 to-yellow-100 min-h-screen flex items-center justify-center p-6">
-  <div
-    id="card"
-    class="bg-white rounded-3xl shadow-2xl p-6 flex flex-col items-center"
-  >
+<body class="bg-gradient-to-tr from-yellow-100 via-yellow-50 to-yellow-100 min-h-screen flex items-center justify-center">
+  <div class="flex items-center justify-center min-h-screen w-full">
+    <div
+      id="card"
+      class="bg-white rounded-3xl shadow-2xl p-6 flex flex-col items-center mx-auto"
+    >
     <h1
       id="book-title"
       class="text-3xl font-bold text-yellow-900 mb-4 text-center leading-tight select-none"
@@ -216,3 +218,4 @@
 </script>
 </body>
 </html>
+</x-layout>
