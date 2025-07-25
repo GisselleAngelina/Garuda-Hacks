@@ -1,3 +1,4 @@
+<x-layout>
 <html lang="en">
  <head>
   <meta charset="utf-8"/>
@@ -38,7 +39,7 @@
     const storyPages = [
       {
         text: "Ini adalah paragraf pertama dari cerita rakyat yang menceritakan tentang asal-usul sebuah desa yang penuh dengan keajaiban dan legenda turun-temurun.",
-        image: "/images/TimunMas.jpg",
+        image: "{{ asset('assets/img/Sangkuriang.webp') }}",
         alt: "Ilustrasi cerita rakyat halaman 1, gambar pemandangan desa tradisional dengan gunung dan sungai"
       },
       {
@@ -98,3 +99,4 @@
   </script>
  </body>
 </html>
+</x-layout>
