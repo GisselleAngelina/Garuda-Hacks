@@ -75,4 +75,13 @@ Route::get('/provinsi/{slug}', function($slug){
 
     // 3) Kembalikan view 'provinsi' dengan variabel $data
     return view('provinsi', ['data' =>$data]);
+    return view('provinsi', ['data' => $data]);
+});
+
+
+Route::get('/ebook/sangkuriang', function () {
+    return view('ebook.sangkuriang');
+});
+Route::get('/ebook/TimunMas', function () {
+    return view('ebook.TimunMas');
 });
