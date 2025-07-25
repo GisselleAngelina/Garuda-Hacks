@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>{{ $heading ?? 'Kinantara' }}</title>
+  <title>{{ $heading ?? 'Kintara' }}</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     .active-nav {
-      border-bottom: 2px solid #FFB627;
+      border-bottom: 2px solid #FFA74F;
     }
   </style>
 </head>
@@ -16,38 +16,18 @@
 {{-- Cek apakah ini beranda --}}
 @php $isHome = request()->is('/'); @endphp
 
-<body
-  @if($isHome)
-    class="relative bg-cover bg-center min-h-screen"
-    style="background-image: url('/assets/img/bg-kintara.png');"
-  @else
-    class="bg-[#FAF9F6] min-h-screen"
-  @endif
->
-  {{-- Jika beranda: overlay gelap --}}
-  @if($isHome)
-    <div class="absolute inset-0 bg-black bg-opacity-50 z-0"></div>
-  @endif
-
-  {{-- Navbar selalu --}}
-  <nav class="relative z-10 flex justify-between items-center px-8 py-4 bg-white/80 backdrop-blur-md">
+<body class="bg-[#FFFDF8] text-[#3A3A3A] min-h-screen">
+  {{-- NAVBAR: hanya ditampilkan setelah hero --}}
+  <nav class="relative z-10 flex justify-between items-center px-8 py-4 bg-[#FFEAD5]/90 backdrop-blur-md">
     <div class="flex items-center gap-2">
-      <img src="/assets/img/logo.png" class="w-15 h-10" alt="Logo">
-      <!-- <span class="font-semibold text-lg text-emerald-800">
-        Kinantara <span class="text-[#FFB627]">(Kisah Nusantara)</span>
-      </span> -->
+      <img src="/assets/img/logo.png" class="w-30 h-16" alt="Logo">
     </div>
-    <div class="flex gap-8 text-sm font-medium">
-      <a href="/"
-         class="{{ request()->is('/') ? 'active-nav text-[#FFB627]' : 'text-gray-700 hover:text-[#FFB627]' }}">
+    <div class="flex gap-8 text-lg font-medium">
+      <a href="/" class="{{ request()->is('/') ? 'active-nav text-[#D26A5E]' : 'text-[#3A3A3A] hover:text-[#FFA74F]' }}">
         Beranda
       </a>
-      <a href="/about"
-         class="{{ request()->is('about') ? 'active-nav text-[#FFB627]' : 'text-gray-700 hover:text-[#FFB627]' }}">
-        Jelajah Pulau
-      </a>
-      <a href="/contact"
-         class="{{ request()->is('contact') ? 'active-nav text-[#FFB627]' : 'text-gray-700 hover:text-[#FFB627]' }}">
+      <a href="#peta" class="text-gray-800 hover:text-[#FFB627]">Jelajah Pulau</a>
+      <a href="/contact" class="{{ request()->is('contact') ? 'active-nav text-[#D26A5E]' : 'text-gray-700 hover:text-[#FFB627]' }}">
         E-Book
       </a>
       <a href="/video"
@@ -56,98 +36,126 @@
       </a>
     </div>
   </nav>
-
-  {{-- Hero cuma di beranda --}}
+  {{-- HERO dengan background image (khusus home) --}}
   @if($isHome)
-    <section class="relative z-10 text-white px-8 mt-20">
-      <div class="max-w-3xl">
-        <h1 class="text-5xl font-semibold drop-shadow-md mb-6">
-          Kisah Nusantara
+    <section 
+      class="relative bg-cover bg-center min-h-screen flex items-center px-8 py-20 text-white"
+      style="background-image: url('/assets/img/bg-kintara.png');"
+    >
+      <div class="absolute inset-0 bg-[#3A3A3A]/60 backdrop-brightness-75"></div>
+      <div class="relative z-10 max-w-3xl">
+        <h1 class="text-9xl font-bold mb-6 drop-shadow-lg tracking-wide bg-gradient-to-r from-orange-400 to-red-500 text-transparent bg-clip-text animate-pulse">
+          Kintara
         </h1>
-        <p class="text-lg text-white/90 mb-8 leading-relaxed drop-shadow-sm">
-          Jelajahi kekayaan budaya Indonesia melalui cerita-cerita indah dari setiap pulau di Nusantara
+        <p class="text-4xl text-white/90 mb-8 leading-relaxed drop-shadow-sm">
+          “Explore the Stories. Keep the Culture Alive.”
         </p>
-        <div class="flex gap-4">
-          <a href="#"
-             class="px-6 py-3 rounded-md bg-[#1B998B] text-white hover:bg-[#157f73] transition">
+        <p class="text-2xl text-white/90 mb-8 leading-relaxed drop-shadow-sm">
+          Platform untuk menjelajahi dan melestarikan cerita serta tradisi budaya Indonesia dari berbagai daerah.
+        </p>
+        <div class="flex flex-wrap gap-4">
+          <a href="#peta" class="px-6 py-3 rounded-md bg-[#FFA74F] text-white shadow-lg hover:bg-[#e08b3c] transition duration-200 font-medium">
             Mulai Menjelajah
           </a>
-          <a href="#"
-             class="px-6 py-3 rounded-md bg-[#3D2C29] text-white hover:bg-[#2e1f1c] transition">
+          <a href="/contact" class="px-6 py-3 rounded-md bg-[#D26A5E] text-white shadow-lg hover:bg-[#bb5045] transition duration-200 font-medium">
             Baca Cerita
           </a>
         </div>
       </div>
     </section>
+
   @endif
 
-  {{-- Konten halaman (slot) --}}
-  <main class="relative z-10 mt-{{ $isHome ? '20' : '0' }}">
-    <div class="px-8 py-4">
-      @if(!$isHome && isset($heading))
-        <h1 class="text-3xl font-bold text-[#3D2C29] mb-6">{{ $heading }}</h1>
-      @endif
-      {{ $slot }}
+  <section id="peta" class="my-12">
+  {{-- MAIN CONTENT (peta, konten dinamis) --}}
+    <main class="relative z-10 mt-8">
+      <div class="px-8 py-4">
+        @if(!$isHome && isset($heading))
+          <h1 class="text-3xl font-bold text-[#3D2C29] mb-6">{{ $heading }}</h1>
+        @endif
+        {{ $slot }}
+      </div>
+    </main>
+  </section>
+  
+  @if($isHome)
+  <section id="koleksi" class="py-16 px-8 bg-[#FFA74F]/50">
+    <div class="max-w-6xl mx-auto text-center mb-12">
+      <h2 class="text-4xl font-bold text-[#3A3A3A] mb-4">Koleksi Cerita Pilihan</h2>
+      <p class="text-lg text-[#3A3A3A]/80">Cerita rakyat dari berbagai daerah.</p>
     </div>
-  </main>
-</body>
-<footer class="bg-gradient-to-r from-green-900 via-teal-700 to-blue-600 text-white pt-16 pb-8">
-  <div class="text-center max-w-2xl mx-auto px-4 mb-12">
-    <h2 class="text-2xl font-bold mb-2">Mulai Petualangan Budaya Anda</h2>
-    <p class="text-sm mb-6">
-      Jangan biarkan kekayaan budaya Indonesia hilang begitu saja. Mari lestarikan dan bagikan cerita-cerita indah ini untuk generasi mendatang.
-    </p>
-    <div class="flex justify-center gap-4 flex-wrap">
-      <a href="#" class="bg-white text-gray-800 font-medium px-4 py-2 rounded shadow hover:bg-gray-200">
-        Jelajahi Cerita
-      </a>
-      <button disabled class="bg-white/30 text-white px-4 py-2 rounded cursor-not-allowed">
-        Cari Berdasarkan Daerah
-      </button>
-    </div>
-  </div>
 
-  <div class="border-t border-white/20 pt-10">
-    <div class="max-w-6xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8 text-sm">
-      <!-- Kolom 1 -->
-      <div>
-        <h3 class="font-semibold text-lg mb-2 flex items-center gap-2">
-          <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 12.414a4 4 0 00-5.657 5.657l4.243 4.243a4 4 0 005.657-5.657z" />
-            <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-          </svg>
-          Nusantara
-        </h3>
-        <p>Menjelajahi kekayaan budaya Indonesia melalui cerita dan tradisi yang tersebar di seluruh Nusantara.</p>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+      <!-- Card 1 -->
+      <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:scale-[1.02] transition duration-300">
+        <img src="/assets/img/Sangkuriang.jpg" class="w-full h-48 object-cover" alt="Cerita">
+        <div class="p-4">
+          <h3 class="text-xl font-semibold mb-2">Sangkuriang</h3>
+          <p class="text-gray-600 text-sm mb-4">Cerita rakyat dari berbagai daerah.</p>
+          <!-- <a href="/ebook/tangkuban-perahu" class="bg-[#FFA74F] hover:bg-[#e08b3c] text-white px-4 py-2 rounded-full text-sm font-medium transition">Lihat Detail</a> -->
+        </div>
       </div>
 
-      <!-- Kolom 2 -->
-      <div>
-        <h3 class="font-semibold text-lg mb-2">Kontak Kami</h3>
-        <ul>
-          <li>📧 info@nusantara.id</li>
-          <li>📞 +62 21 1234 5678</li>
-          <li>📍 Jakarta, Indonesia</li>
-        </ul>
+      <!-- Card 2 -->
+      <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:scale-[1.02] transition duration-300">
+        <img src="/assets/img/MalinKundang.jpg" class="w-full h-48 object-cover" alt="Cerita">
+        <div class="p-4">
+          <h3 class="text-xl font-semibold mb-2">Malin Kundang</h3>
+          <p class="text-gray-600 text-sm mb-4">Cerita rakyat dari berbagai daerah.</p>
+        </div>
       </div>
 
-      <!-- Kolom 3 -->
-      <div>
-        <h3 class="font-semibold text-lg mb-2">Jelajahi</h3>
-        <div class="grid grid-cols-2 gap-x-4">
-          <ul class="space-y-1">
-            <li><a href="#" class="hover:underline">Pulau Jawa</a></li>
-            <li><a href="#" class="hover:underline">Kalimantan</a></li>
-            <li><a href="#" class="hover:underline">Papua</a></li>
-          </ul>
-          <ul class="space-y-1">
-            <li><a href="#" class="hover:underline">Pulau Sumatra</a></li>
-            <li><a href="#" class="hover:underline">Sulawesi</a></li>
-            <li><a href="#" class="hover:underline">Semua Cerita</a></li>
-          </ul>
+      <!-- Card 3 -->
+      <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:scale-[1.02] transition duration-300">
+        <img src="/assets/img/TimunMas.jpg" class="w-full h-48 object-cover" alt="Cerita">
+        <div class="p-4">
+          <h3 class="text-xl font-semibold mb-2">Timun Mas</h3>
+          <p class="text-gray-600 text-sm mb-4">Cerita kepahlawanan dari Jawa Tengah.</p>
+          <!-- <a href="/ebook/timun-mas" class="bg-[#FFA74F] hover:bg-[#e08b3c] text-white px-4 py-2 rounded-full text-sm font-medium transition">Lihat Detail</a> -->
         </div>
       </div>
     </div>
+
+    <!-- Tombol CTA -->
+    <div class="text-center mt-12">
+      <a href="/contact" class="px-8 py-3 rounded-md bg-[#D26A5E] text-white hover:bg-[#bb5045] font-semibold shadow-md transition">
+        Jelajahi Koleksi Lengkap
+      </a>
+    </div>
+  </section>
+@endif
+
+</body>
+<footer class="bg-gradient-to-r from-[#FFA74F] via-[#F9C784] to-[#D26A5E] text-[##3A3A3A] px-6 py-12">
+  <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 text-sm text-center">
+    
+    <!-- Kolom 1: Tagline -->
+    <div>
+      <h2 class="text-xl font-semibold mb-2">Tagline</h2>
+      <p>
+        “Explore the Stories. Keep the Culture Alive.”
+      </p>
+    </div>
+
+    <!-- Kolom 2: Deskripsi Singkat -->
+    <div>
+      <h2 class="text-xl font-semibold mb-2">Kintara</h2>
+      <p>
+        Platform untuk menjelajahi dan melestarikan cerita serta tradisi budaya Indonesia dari berbagai daerah.
+      </p>
+    </div>
+
+    <!-- Kolom 3: Kontak -->
+    <div>
+      <h2 class="text-xl font-semibold mb-2">Kontak</h2>
+      <ul class="space-y-1">
+        <li>📧 info@kintara.id</li>
+        <li>📍 Jakarta, Indonesia</li>
+      </ul>
+    </div>
+    
   </div>
 </footer>
+
+
 </html>
