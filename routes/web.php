@@ -5,11 +5,12 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('home');
 });
-Route::get('/about', function () {
-    return view('pages.about');
+Route::get('/jelajahpulau', function () {
+    return view('pages.jelajahpulau');
 });
 Route::get('/contact', function () {
     return view('pages.contact');
+
 });
 
 // halaman pulau
@@ -44,4 +45,7 @@ Route::get('/provinsi/{slug}', function($slug){
 
     // 3) Kembalikan view 'provinsi' dengan variabel $data
     return view('provinsi', ['data' => $data]);
+});
+Route::get('/ebook/sangkuriang', function () {
+    return view('ebook.sangkuriang');
 });
