@@ -2,15 +2,45 @@
 
 use Illuminate\Support\Facades\Route;
 
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| • Beranda        → resources/views/home.blade.php
+| • About         → resources/views/pages/about.blade.php
+| • Contact       → resources/views/pages/contact.blade.php
+| • Detail Prov.  → resources/views/provinsi.blade.php
+|
+*/
+
 Route::get('/', function () {
     return view('home');
 });
-Route::get('/jelajahpulau', function () {
-    return view('pages.jelajahpulau');
-});
-Route::get('/contact', function () {
-    return view('pages.contact');
 
+// Halaman statis About & Contact
+Route::view('/about',   'pages.about');
+Route::view('/contact', 'pages.contact');
+Route::view('/video', 'pages.video');
+Route::get('/ebook/sangkuriang', function () {
+    return view('ebook.sangkuriang');
+});
+
+
+Route::get('/ebook/{judul}', function ($judul) {
+    if (view()->exists("ebook.$judul")) {
+        return view("ebook.$judul");
+    } else {
+        abort(404);
+    }
+});
+
+Route::get('/video/{judul}', function ($judul) {
+    if (view()->exists("video.$judul")) {
+        return view("video.$judul");
+    } else {
+        abort(404);
+    }
 });
 
 // halaman pulau
@@ -44,8 +74,5 @@ Route::get('/provinsi/{slug}', function($slug){
     $data = $provinsiData[$slug] ?? abort(404);
 
     // 3) Kembalikan view 'provinsi' dengan variabel $data
-    return view('provinsi', ['data' => $data]);
-});
-Route::get('/ebook/sangkuriang', function () {
-    return view('ebook.sangkuriang');
+    return view('provinsi', ['data' =>$data]);
 });
