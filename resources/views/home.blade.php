@@ -5,13 +5,13 @@
   {{-- PETA INTERAKTIF --}}
   <section 
     x-data="mapData()" 
-    class="py-16 bg-[#FAF9F6]"
+    class="py-16 bg-[#eddca7]"
     >
     <div class="text-center mb-8">
-        <h2 class="text-2xl font-semibold text-[#3D2C29]">Peta Interaktif Indonesia</h2>
-        <p class="text-sm text-gray-600">
+        <h2 class="text-5xl font-semibold text-[#3D2C29]">Peta Interaktif Indonesia</h2>
+        <h2 class="text-2xl text-gray-600">
         Klik pada pulau untuk menjelajahi cerita dan budaya di tiap provinsi
-        </p>
+        </h2>
     </div>
 
     <div class="relative max-w-4xl mx-auto rounded-lg overflow-visible shadow-lg">
